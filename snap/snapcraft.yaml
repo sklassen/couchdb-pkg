@@ -8,58 +8,27 @@ grade: stable
 apps:
     server:
         daemon: simple
-        command: rel/couchdb/bin/snap_run
+        command: rel/bin/snap_run
         plugs: [network-bind, process-control]
     couchdb:
-        command: rel/couchdb/bin/snap_run
+        command: rel/bin/snap_run
         plugs: [network-bind, mount-observe, browser-support]
 parts:
     couchdb: 
-        plugin: make
-        source: http://www-us.apache.org/dist/couchdb/source/2.2.0/apache-couchdb-2.2.0.tar.gz
-        #source: https://github.com/apache/couchdb.git
-        #source-type: git
-        #source-tag: 2.2.0
+        plugin: nil
         override-build: |
-          ./configure --disable-docs
-          make release
-          cp -ra ./rel $SNAPCRAFT_PART_INSTALL
-          cp -ra ./bin $SNAPCRAFT_PART_INSTALL
-        build-packages:
-          - binutils
-          - libc6-dev
-          - gcc
-          - g++
-          - make
-          - erlang-dev
-          - erlang-base
-          - erlang-reltool
-          - libcurl4-openssl-dev
-          - libmozjs185-dev
-          - libnspr4-dev
-          - libicu-dev
-          - icu-devtools
-          # For erlang/rebar processing
-          - erlang-nox
-          - erlang-os-mon
-          - erlang-syntax-tools
-          # For fauxton
-          - nodejs-dev
-          - nodejs-legacy
-          - npm
+          cp -ra /opt/couchdb $SNAPCRAFT_PART_INSTALL/rel/
         stage:
             - rel
-            - bin
         prime:
             - rel
-            - bin
 
     snap-config:
         plugin: dump
         source: ./snap/
         organize:
-            couchdb.ini: rel/couchdb/etc/default.d/couchdb.ini
-            snap_run: rel/couchdb/bin/snap_run
+            couchdb.ini: rel/etc/default.d/couchdb.ini
+            snap_run: rel/bin/snap_run
 
     packages:
         plugin: nil
