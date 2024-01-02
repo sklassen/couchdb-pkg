@@ -79,3 +79,6 @@ apps:
   couchjs:
     command: bin/couchjs
     plugs: [network, network-bind]
+  weatherreport:
+    command: bin/weatherreport
+    plugs: [network, network-bind]
