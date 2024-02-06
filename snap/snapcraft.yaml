@@ -1,5 +1,5 @@
 ---
-name: couchdb
+name: couchdb-sklassen
 version: 3.3.3
 type: app
 base: core22
@@ -14,10 +14,6 @@ grade: stable
 confinement: strict
 
 architectures:
-  - build-on: s390x
-  - build-on: ppc64el
-  - build-on: arm64
-  - build-on: armhf
   - build-on: amd64
 
 parts:
@@ -30,9 +26,7 @@ parts:
       - gcc
       - g++
       - libc6-dev
-      - libcurl4-openssl-dev
       - libicu-dev
-      - icu-devtools
       # For erlang/rebar processing
       - erlang-dev
       - erlang-base
@@ -44,16 +38,15 @@ parts:
       # mozjs
       - libmozjs-91-dev
       # For fauxton
-      - libnode-dev
       - npm
     stage-packages:
-      - procps
-      - libcurl4
       - libicu70
       - libmozjs-91-0
       - libssl3
-      - libtinfo5
     stage:
+      - -usr/lib/**/libicuio.so.*
+      - -usr/lib/**/libicutu.so.*
+      - -usr/lib/**/libicutest.so.*
       - -usr/share/doc
       - -usr/share/man
       - -var

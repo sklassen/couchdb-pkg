@@ -51,4 +51,3 @@ fi
 
 
 #snap set ${SNAP_INSTANCE_NAME} setcookie=`echo $RANDOM | md5sum | head -c 20; echo;`
-
