@@ -78,6 +78,8 @@ parts:
       
       # Verifying that all is working
       #make check
+    build-snaps:
+      - gradle --classic
     build-packages:
       - gcc
       - g++
@@ -86,6 +88,8 @@ parts:
       - libssl-dev
       # Mozilla JS engine
       - libmozjs-91-dev
+      # For Fauxton
+      - npm
     stage-packages:
       - libicu70
       - libssl3
